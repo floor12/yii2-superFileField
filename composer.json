@@ -1,0 +1,29 @@
+{
+  "name": "floor12/yii2-superFileField",
+  "description": "Yii2 extention to upload files (images, video, files) to your models",
+  "type": "yii2-extension",
+  "minimum-stability": "stable",
+  "keywords": [
+    "floor12",
+    "yii",
+    "yii2",
+    "yii 2"
+  ],
+  "license": "BSD-3-Clause",
+  "authors": [
+    {
+      "name": "floor12",
+      "email": "primelifecoder@gmail.com",
+      "role": "Developer"
+    }
+  ],
+  "require": {
+    "yiisoft/yii2": "~2.0.7",
+    "yiisoft/yii2-jui": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "floor12\superfilefield": "src"
+    }
+  }
+}
