@@ -1,5 +1,5 @@
 {
-  "name": "floor12/yii2-superFileField",
+  "name": "floor12/yii2-super-file-field",
   "description": "Yii2 extention to upload files (images, video, files) to your models",
   "type": "yii2-extension",
   "minimum-stability": "stable",
