@@ -9,7 +9,10 @@
 namespace floor12\superfilefield;
 
 
-class File 
+class File
 {
-
+    function test()
+    {
+        
+    }
 }
