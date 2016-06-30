@@ -19,7 +19,8 @@
   ],
   "require": {
     "yiisoft/yii2": "~2.0.7",
-    "yiisoft/yii2-jui": "*"
+    "yiisoft/yii2-jui": "*",
+    "bower-asset/cropper": "*"
   },
   "autoload": {
     "psr-4": {

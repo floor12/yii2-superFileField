@@ -1,0 +1,88 @@
+
+.superfield-process {
+    margin: 10px 0;
+    display: none;
+    max-width: 400px;
+}
+
+div.superfile {
+    background-color: #eee;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px #ccc solid;
+    margin: 10px 0 0 0;
+    font-size: 80%;
+    overflow: hidden;
+    height: 35px;
+    white-space: nowrap;
+}
+
+div.superfile-type-1 {
+    background-color: #dde3ea;
+}
+
+div.superfile-type-2 {
+    background-color: #cfe0d3;
+}
+
+div.superfile-type-0 {
+    background-color: #e7eadd;
+}
+
+div.superfield-list {
+    max-width: 400px;
+}
+
+div.superfile-converting {
+    background-image: url(ajax-loader.gif);
+    background-repeat: no-repeat;
+    background-position: 95% 11px;
+    background-color: #eee;
+}
+
+div.superfile-control {
+    padding-top: 5px;
+    padding-right: 15px;
+    text-align: right;
+    background-color: rgba(0, 0, 0, 0.5);
+    height: 40px;
+    width: 110%;
+    margin: -25px -5%;
+    display: none;
+    cursor: move;
+}
+
+div.superfile-control .edit input {
+    font-size: 120%;
+    margin-top: -2px;
+    padding: 2px;
+    width: 90%;
+}
+
+div.superfile-preview {
+    display: none;
+    margin: 9px 0 0 -10px;
+    z-index: 20;
+    position: absolute;
+    background-color: #eee;
+    padding: 5px;
+    border: 1px #c3c3c3 solid;
+    border-radius: 4px;
+    -webkit-box-shadow: 0px 0px 40px -9px rgba(0, 0, 0, 0.57);
+    -moz-box-shadow: 0px 0px 40px -9px rgba(0, 0, 0, 0.57);
+    box-shadow: 0px 0px 40px -9px rgba(0, 0, 0, 0.57);
+    max-width: 300px;
+}
+
+div.superfile-preview video {
+    max-width: 300px;
+}
+
+span.flipet {
+    -moz-transform: scaleX(-1);
+    -o-transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+    filter: FlipH;
+    -ms-filter: "FlipH";
+}
