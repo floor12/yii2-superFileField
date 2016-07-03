@@ -51,11 +51,32 @@ class File extends \yii\db\ActiveRecord
      */
 
 
+    public static function generatePath()
+    {
+        $folder0 = rand(10, 99);
+        $folder1 = rand(10, 99);
+
+        $path0 = self::FOLDER_NAME . DIRECTORY_SEPARATOR . $folder0;
+        $path1 = self::FOLDER_NAME . DIRECTORY_SEPARATOR . $folder0 . DIRECTORY_SEPARATOR . $folder1;
+
+        $fullPath0 = Yii::getAlias('@frameworkbase') . DIRECTORY_SEPARATOR . 'backend/web/' . $path0;
+        $fullPath1 = Yii::getAlias('@frameworkbase') . DIRECTORY_SEPARATOR . 'backend/web/' . $path1;
+
+        if (!file_exists($fullPath0))
+            mkdir($fullPath0);
+        if (!file_exists($fullPath1))
+            mkdir($fullPath1);
+
+        return DIRECTORY_SEPARATOR . $path1 . DIRECTORY_SEPARATOR . md5(rand(0, 1000) . time());
+    }
+
     public static function createFromInstance($instance, $class, $field, $id = 0)
     {
         if ($instance->error)
             return false;
-        $filename = DIRECTORY_SEPARATOR . self::FOLDER_NAME . DIRECTORY_SEPARATOR . md5(rand(0, 1000) . time()) . '.' . $instance->extension;
+
+        $filename = self::generatePath() . '.' . $instance->extension;
+
         $path = Yii::getAlias('@webroot') . $filename;
         $file = new File();
         $file->field = $field;
@@ -107,7 +128,7 @@ class File extends \yii\db\ActiveRecord
 
         imagecopy($dest, $src, 0, 0, $left, $top, $width, $height);
 
-        $newName = $filename = DIRECTORY_SEPARATOR . self::FOLDER_NAME . DIRECTORY_SEPARATOR . md5(rand(0, 1000) . time()) . '.jpeg';
+        $newName = $filename = self::generatePath() . '.jpeg';
         $path = Yii::getAlias('@webroot') . $newName;
 
         @unlink($this->rootPath);
