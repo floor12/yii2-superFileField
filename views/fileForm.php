@@ -13,11 +13,7 @@ CropperAsset::register($this);
 $rand = md5(rand(0, 1000) . time());
 ?>
 
-<script>
-    var className = '<?= $class ?>';
-    var csrfToken = '<?= Yii::$app->request->csrfToken; ?>';
-    var csrfParam = '<?= Yii::$app->request->csrfParam; ?>';
-</script>
+
 
 <?= $this->render('cropper'); ?>
 
