@@ -92,13 +92,15 @@ class SuperFileFieldBehavior extends Behavior
         return $ret;
     }
 
-//    public function getSuperFilesAsArray()
-//    {
-//        $ret = [];
-//        if ($this->superFiles)
-//            foreach ($this->superFiles as $file)
-//                $ret[] = $file->id;
-//        return $ret;
-//    }
+    public function getAllSuperFilesAsArray()
+    {
+        $ret = [];
+        if ($this->superFiles)
+            foreach ($this->superFiles as $field => $array)
+                foreach ($array as $file) {
+                    $ret[] = $file->id;
+                }
+        return $ret;
+    }
 
 }
