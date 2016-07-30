@@ -97,16 +97,17 @@ class SuperfilefieldController extends ActiveController
         $ret = [];
         $files = UploadedFile::getInstancesByName('file');
         $className = Yii::$app->request->post('class');
-
         if ((sizeof($files) > 0) && ($className)) {
             $response = \Yii::$app->getResponse();
             $response->setStatusCode(201);
             foreach ($files as $file) {
-                $ret[] = $model = File::createFromInstance($file, \Yii::$app->request->post('class'), \Yii::$app->request->post('field'));
+                $ret[] = $model = File::createFromInstance($file, $className, \Yii::$app->request->post('field'));
             }
         } else {
             throw new BadRequestHttpException();
         }
+        if (sizeof($ret) == 1)
+            return $ret[0];
         return $ret;
     }
 

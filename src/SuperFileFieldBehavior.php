@@ -87,7 +87,7 @@ class SuperFileFieldBehavior extends Behavior
     {
         $ret = [];
         if ($this->fields) foreach ($this->fields as $field => $fieldName) {
-            $ret[$field] = File::find()->orderBy('ordering')->where(['field' => $field, 'object_id' => $this->owner->id, 'class' => \yii\helpers\StringHelper::basename(get_class($this->owner))])->all();
+            $ret[$field] = File::find()->orderBy('ordering')->where(['field' => $field, 'object_id' => $this->owner->id, 'class' => $this->owner->className()])->all();
         }
         return $ret;
     }
