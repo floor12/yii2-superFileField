@@ -20,6 +20,7 @@ function superfileIndex(classname, field, object_id, selector) {
 
 function superfileRander(data, selector) {
 
+    console.log(data);
     switch (data.type) {
         case 0:
             glyph = 'glyphicon glyphicon-file';
@@ -68,7 +69,7 @@ function superfileRander(data, selector) {
         '</div>' +
         '</div>';
 
-    view += '<input type="hidden" value="' + data.id + '" name="' + data.class + '[superfilesArray][' + data.field + '][]">';
+    view += '<input type="hidden" value="' + data.id + '" name="' + data.class.replace("common\\models\\", "") + '[superfilesArray][' + data.field + '][]">';
     view += '</div>';
 
     $(selector).append(view);

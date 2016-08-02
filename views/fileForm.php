@@ -38,7 +38,7 @@ $rand = md5(rand(0, 1000) . time());
 
 $this->registerJs("
 
-    var className = '{$class}';
+    var className = '{$classname}';
     var csrfToken = '" . Yii::$app->request->csrfToken . "';
     var csrfParam = '" . Yii::$app->request->csrfParam . "';
     
@@ -63,10 +63,7 @@ $this->registerJs("
                 alert(filename + ' upload failed');
                 return false;
             }
-            $.each(response,function(key,value){
-                        superfileRander(value,'#superFileField_{$rand}')
-
-            });
+            superfileRander(response,'#superFileField_{$rand}')
         }
     });
 

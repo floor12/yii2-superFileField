@@ -53,7 +53,7 @@ class SuperfilefieldController extends ActiveController
 
     public function actionIndex($class, $field, $object_id)
     {
-        $classname = "\common\models\\" . $class;
+        $classname = $class;
         $object = $classname::findOne($object_id);
         return $object->superFiles[$field];
     }

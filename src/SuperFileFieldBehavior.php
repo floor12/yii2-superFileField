@@ -28,7 +28,7 @@ class SuperFileFieldBehavior extends Behavior
             'id' => $this->owner->id,
             'attributeName' => $this->fields[$field],
             'field' => $field,
-            'class' => \yii\helpers\StringHelper::basename(get_class($this->owner))
+            'classname' => str_replace('\\', '\\\\', $this->owner->className()),
         ]);
     }
 
