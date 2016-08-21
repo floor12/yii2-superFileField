@@ -77,7 +77,7 @@ class SuperFileFieldBehavior extends Behavior
     function __construct()
     {
         parent::__construct();
-        self::checkImageDir();
+       // self::checkImageDir();
     }
 
     public
