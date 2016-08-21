@@ -56,18 +56,18 @@ class File extends \yii\db\ActiveRecord
         $folder0 = rand(10, 99);
         $folder1 = rand(10, 99);
 
-        $path0 = self::FOLDER_NAME . DIRECTORY_SEPARATOR . $folder0;
-        $path1 = self::FOLDER_NAME . DIRECTORY_SEPARATOR . $folder0 . DIRECTORY_SEPARATOR . $folder1;
+        $path0 = self::FOLDER_NAME . "/" . $folder0;
+        $path1 = self::FOLDER_NAME . "/" . $folder0 . "/" . $folder1;
 
-        $fullPath0 = Yii::getAlias('@frameworkbase') . DIRECTORY_SEPARATOR . 'backend/web/' . $path0;
-        $fullPath1 = Yii::getAlias('@frameworkbase') . DIRECTORY_SEPARATOR . 'backend/web/' . $path1;
+        $fullPath0 = Yii::getAlias('@frameworkbase') . "/" . 'backend/web/' . $path0;
+        $fullPath1 = Yii::getAlias('@frameworkbase') . "/" . 'backend/web/' . $path1;
 
         if (!file_exists($fullPath0))
             mkdir($fullPath0);
         if (!file_exists($fullPath1))
             mkdir($fullPath1);
 
-        return DIRECTORY_SEPARATOR . $path1 . DIRECTORY_SEPARATOR . md5(rand(0, 1000) . time());
+        return "/" . $path1 . "/" . md5(rand(0, 1000) . time());
     }
 
     public static function createFromInstance($instance, $class, $field, $id = 0)
@@ -201,6 +201,9 @@ class File extends \yii\db\ActiveRecord
             if (!file_exists($this->rootPreviewPath)) {
                 exec(Yii::getAlias('@ffmpeg') . " -i {$this->rootPath} -ss 00:00:6.000 -vframes 1  {$this->rootPreviewPath}");
             }
+            if (!file_exists($this->rootPreviewPath)) {
+                exec(Yii::getAlias('@ffmpeg') . " -i {$this->rootPath} -ss 00:00:2.000 -vframes 1  {$this->rootPreviewPath}");
+            }
         }
 
         if ($this->type == self::TYPE_IMAGE)
@@ -221,13 +224,13 @@ class File extends \yii\db\ActiveRecord
     public
     function getRootPath()
     {
-        return Yii::getAlias('@frameworkbase') . DIRECTORY_SEPARATOR . 'backend' . DIRECTORY_SEPARATOR . 'web' . $this->filename;
+        return Yii::getAlias('@frameworkbase') . "/" . 'backend' . "/" . 'web' . $this->filename;
     }
 
     public
     function getRootPreviewPath()
     {
-        return Yii::getAlias('@frameworkbase') . DIRECTORY_SEPARATOR . 'backend' . DIRECTORY_SEPARATOR . 'web' . $this->filename . '.jpg';
+        return Yii::getAlias('@frameworkbase') . "/" . 'backend' . "/" . 'web' . $this->filename . '.jpg';
     }
 
 

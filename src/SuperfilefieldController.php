@@ -60,7 +60,9 @@ class SuperfilefieldController extends ActiveController
 
     public function actionDelete()
     {
-        $id = \Yii::$app->request->getBodyParam('id');
+        $id = (int)\Yii::$app->request->get('id');
+        if (!$id)
+            $id = (int)\Yii::$app->request->getBodyParam('id');
         $file = File::findOne($id);
         if (!$file)
             throw new NotFoundHttpException('This file not found.');
@@ -88,7 +90,10 @@ class SuperfilefieldController extends ActiveController
         if ($file->type != File::TYPE_IMAGE)
             throw new BadRequestHttpException('This file is not an image.');
 
-        return ['filename' => $file->crop($width, $height, $top, $left)];
+        if ($file->crop($width, $height, $top, $left))
+            return $file;
+        else
+            throw new BadRequestHttpException;
     }
 
     public
@@ -97,11 +102,12 @@ class SuperfilefieldController extends ActiveController
         $ret = [];
         $files = UploadedFile::getInstancesByName('file');
         $className = Yii::$app->request->post('class');
-        if ((sizeof($files) > 0) && ($className)) {
+        $field = \Yii::$app->request->post('field');
+        if ((sizeof($files) > 0) && ($className) && ($field)) {
             $response = \Yii::$app->getResponse();
             $response->setStatusCode(201);
             foreach ($files as $file) {
-                $ret[] = $model = File::createFromInstance($file, $className, \Yii::$app->request->post('field'));
+                $ret[] = $model = File::createFromInstance($file, $className, $field);
             }
         } else {
             throw new BadRequestHttpException();

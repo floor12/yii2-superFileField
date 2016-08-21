@@ -42,7 +42,7 @@ $this->registerJs("
     var csrfToken = '" . Yii::$app->request->csrfToken . "';
     var csrfParam = '" . Yii::$app->request->csrfParam . "';
     
-    superfileIndex(className, '{$field}', {$id}, '#superFileField_{$rand}')
+    superfileIndex(className, '{$field}', " . (int)$id . ", '#superFileField_{$rand}')
 
     new ss.SimpleUpload({
         button: $('#file-field-add_{$rand}'), // HTML element used as upload button

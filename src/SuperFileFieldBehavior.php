@@ -43,22 +43,30 @@ class SuperFileFieldBehavior extends Behavior
     public function superfilesUpdate()
     {
         $order = 0;
-        if ($this->superfilesArray)
-            foreach ($this->superfilesArray as $field) {
+        if ($this->superfilesArray) {
+
+
+            foreach ($this->superfilesArray as $key => $field) {
+                \Yii::$app->db->createCommand("UPDATE file SET `object_id`=0 WHERE `class`='" . str_replace('\\', '\\\\', $this->owner->className()) . "' AND `object_id`='{$this->owner->id}' AND `field`='{$key}'")->query();
                 if ($field) foreach ($field as $id) {
                     $file = File::findOne($id);
-                    $file->object_id = $this->owner->id;
-                    $file->ordering = $order;
-                    $file->save();
-                    $order++;
-                    if (!$file->save()) {
-                        print_r($file->getErrors());
+                    if ($file) {
+                        $file->object_id = $this->owner->id;
+                        $file->ordering = $order;
+                        $file->save();
+                        $order++;
+                        if (!$file->save()) {
+                            print_r($file->getErrors());
+                        }
                     }
+
                 }
             }
+        }
     }
 
-    public function attach($owner)
+    public
+    function attach($owner)
     {
         parent::attach($owner);
         $validators = $owner->validators;
@@ -72,7 +80,8 @@ class SuperFileFieldBehavior extends Behavior
         self::checkImageDir();
     }
 
-    public function checkImageDir()
+    public
+    function checkImageDir()
     {
         $imagePath = \Yii::getAlias('@webroot') . '/' . File::FOLDER_NAME;
         if (!file_exists($imagePath)) {
@@ -80,10 +89,10 @@ class SuperFileFieldBehavior extends Behavior
                 return true;
         }
         return true;
-        die();
     }
 
-    public function getSuperFiles()
+    public
+    function getSuperFiles()
     {
         $ret = [];
         if ($this->fields) foreach ($this->fields as $field => $fieldName) {
@@ -92,7 +101,8 @@ class SuperFileFieldBehavior extends Behavior
         return $ret;
     }
 
-    public function getAllSuperFilesAsArray()
+    public
+    function getAllSuperFilesAsArray()
     {
         $ret = [];
         if ($this->superFiles)

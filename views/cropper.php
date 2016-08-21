@@ -26,6 +26,7 @@
                         <button type="button" class="btn btn-primary" id='superfield-control-02'>3/4</button>
                         <button type="button" class="btn btn-primary" id='superfield-control-03'>4/3</button>
                         <button type="button" class="btn btn-primary" id='superfield-control-04'>16/9</button>
+                        <button type="button" class="btn btn-primary" id='superfield-control-05'>64 / 19</button>
                     </div>
                     <div class="col-md-6 text-right">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>

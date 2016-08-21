@@ -178,6 +178,10 @@ $(document).ready(function () {
         $('#superfield-control-04').click(function () {
             cropper.cropper('setAspectRatio', 16 / 9);
         });
+
+        $('#superfield-control-05').click(function () {
+            cropper.cropper('setAspectRatio', 64 / 19);
+        });
     })
 
     $(document).on('click', '.superfile-rotate', function () {
