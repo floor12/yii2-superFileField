@@ -10,6 +10,7 @@
 namespace floor12\superfilefield;
 
 use yii\base\Behavior;
+use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
 use yii\validators\Validator;
 
@@ -74,29 +75,40 @@ class SuperFileFieldBehavior extends Behavior
         $validators->append($validator);
     }
 
-    function __construct()
-    {
-        parent::__construct();
-       // self::checkImageDir();
-    }
+//    function __construct()
+//    {
+//        parent::__construct();
+//       // self::checkImageDir();
+//    }
+//
+//    public
+//    function checkImageDir()
+//    {
+//        $imagePath = \Yii::getAlias('@webroot') . '/' . File::FOLDER_NAME;
+//        if (!file_exists($imagePath)) {
+//            if (mkdir($imagePath))
+//                return true;
+//        }
+//        return true;
+//    }
 
-    public
-    function checkImageDir()
+
+    public function getFiles()
     {
-        $imagePath = \Yii::getAlias('@webroot') . '/' . File::FOLDER_NAME;
-        if (!file_exists($imagePath)) {
-            if (mkdir($imagePath))
-                return true;
-        }
-        return true;
+        return $this->owner->hasMany(File::className(), ['object_id' => 'id'])->onCondition(['class' => $this->owner->className()]);;
     }
 
     public
     function getSuperFiles()
     {
+        $files = $this->owner->files;
         $ret = [];
-        if ($this->fields) foreach ($this->fields as $field => $fieldName) {
-            $ret[$field] = File::find()->orderBy('ordering')->where(['field' => $field, 'object_id' => $this->owner->id, 'class' => $this->owner->className()])->all();
+        if ($this->fields) foreach ($this->fields as $key => $field) {
+            $ret[$key] = [];
+        }
+        /** @var $file File */
+        if ($files) foreach ($files as $file) {
+            $ret[$file->field][] = $file;
         }
         return $ret;
     }
